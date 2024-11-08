@@ -18,21 +18,15 @@ def roll(code):
 
     Raises:
         ValueError: If the input format is incorrect or if the specified dice type is not supported.
-
-    Example:
-        >>> roll("2D10+10")
-        25  # Example output
-        >>> roll("D6")
-        4   # Example output
     """
-    for type in TYPES:
-        if type in code:
+    for dice_type in TYPES:
+        if dice_type in code:
             try:
-                multiply, modifier = code.split(type)
+                multiply, modifier = code.split(dice_type)
             except ValueError:
                 return "Wrong input type"
 
-            type_value = int(type[1:])
+            dice_value = int(dice_type[1:])
             break
     else:
         return "Wrong input type"
@@ -47,7 +41,7 @@ def roll(code):
     except ValueError:
         return "Wrong input type"
 
-    total_roll = sum(random.randint(1, type_value) for _ in range(multiply)) + modifier
+    total_roll = sum(random.randint(1, dice_value) for _ in range(multiply)) + modifier
     return total_roll
 
 if __name__ == "__main__":
